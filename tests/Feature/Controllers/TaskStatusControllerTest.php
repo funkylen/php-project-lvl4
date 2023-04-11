@@ -46,7 +46,7 @@ class TaskStatusControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $body = TaskStatus::factory()->make()->toArray();
-        $response = $this->post(route('task_statuses.store'), $body);
+        $response = $this->post(route('task_statuses.store'), ['task_status' => $body]);
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
@@ -60,7 +60,7 @@ class TaskStatusControllerTest extends TestCase
 
         $model = TaskStatus::factory()->create();
         $body = TaskStatus::factory()->make()->toArray();
-        $response = $this->put(route('task_statuses.update', $model), $body);
+        $response = $this->put(route('task_statuses.update', $model), ['task_status' => $body]);
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
