@@ -10,3 +10,6 @@ lint-fix:
 
 test:
 	composer exec -- phpunit
+
+test-coverage:
+	XDEBUG_MODE=coverage composer exec -- phpunit --coverage-clover=build/logs/clover.xml
