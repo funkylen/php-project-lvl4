@@ -15,10 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')">
+                        {{ __('task_status.index') }}
+                    </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -61,6 +65,7 @@
                     </svg>
                 </button>
             </div>
+            @endauth
         </div>
     </div>
 
@@ -72,6 +77,7 @@
             </x-responsive-nav-link>
         </div>
 
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -96,5 +102,6 @@
                 </form>
             </div>
         </div>
+        @endauth
     </div>
 </nav>

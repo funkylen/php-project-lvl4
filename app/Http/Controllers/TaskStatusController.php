@@ -18,7 +18,7 @@ class TaskStatusController extends Controller
     public function index(): View
     {
         return view('task_status.index', [
-            'statuses' => TaskStatus::all(),
+            'models' => TaskStatus::all(),
         ]);
     }
 
@@ -26,9 +26,9 @@ class TaskStatusController extends Controller
     {
         TaskStatus::create($request->validated());
 
-        flash(__('Статус успешно создан'));
+        flash()->success(__('task_statuses.stored'));
 
-        return redirect('task_statuses.index');
+        return redirect(route('task_statuses.index'));
     }
 
     public function create(): View
@@ -47,17 +47,17 @@ class TaskStatusController extends Controller
     {
         $taskStatus->update($request->validated());
 
-        flash(__('Статус успешно изменён'));
+        flash()->success(__('task_statuses.updated'));
 
-        return redirect('task_statuses.index');
+        return redirect(route('task_statuses.index'));
     }
 
     public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
         $taskStatus->delete();
 
-        flash(__('Статус успешно удалён'));
+        flash()->success(__('task_statuses.deleted'));
 
-        return redirect('task_statuses.index');
+        return redirect(route('task_statuses.index'));
     }
 }
