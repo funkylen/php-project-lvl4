@@ -9,7 +9,10 @@ return [
     'description' => 'Описание',
     'edit' => 'Изменить',
     'actions' => 'Действия',
-    'create' => 'Создать статус',
+    'create' => 'Создать задачу',
     'store' => 'Создать',
     'update' => 'Обновить',
+    'status' => 'Статус',
+    'created_by_id' => 'Автор',
+    'assigned_to_id' => 'Исполнитель',
 ];
