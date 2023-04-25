@@ -45,7 +45,7 @@ class TaskControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
-        $body = Task::factory()->make()->toArray();
+        $body = Task::factory()->make()->only('description', 'name', 'assigned_to_id', 'status_id');
         $response = $this->post(route('tasks.store'), ['task' => $body]);
 
         $response->assertRedirect();
@@ -59,7 +59,7 @@ class TaskControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $model = Task::factory()->create();
-        $body = Task::factory()->make()->toArray();
+        $body = Task::factory()->make()->only('description', 'name', 'assigned_to_id', 'status_id');
         $response = $this->put(route('tasks.update', $model), ['task' => $body]);
 
         $response->assertRedirect();
