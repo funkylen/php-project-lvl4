@@ -45,7 +45,7 @@ class TaskStatusControllerTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
-        $body = TaskStatus::factory()->make()->only('name');
+        $body = TaskStatus::factory()->make()->toArray();
         $response = $this->post(route('task_statuses.store'), $body);
 
         $response->assertRedirect();
@@ -59,7 +59,7 @@ class TaskStatusControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $model = TaskStatus::factory()->create();
-        $body = TaskStatus::factory()->make()->only('name');
+        $body = TaskStatus::factory()->make()->toArray();
         $response = $this->put(route('task_statuses.update', $model), $body);
 
         $response->assertRedirect();
@@ -81,6 +81,6 @@ class TaskStatusControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
 
-        $this->assertDatabaseMissing('task_statuses', $model->toArray());
+        $this->assertDatabaseMissing('task_statuses', ['id' => $model->id]);
     }
 }

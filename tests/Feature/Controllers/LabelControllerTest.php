@@ -46,7 +46,7 @@ class LabelControllerTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $body = Label::factory()->make()->toArray();
-        $response = $this->post(route('labels.store'), ['label' => $body]);
+        $response = $this->post(route('labels.store'), $body);
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
@@ -60,13 +60,13 @@ class LabelControllerTest extends TestCase
 
         $model = Label::factory()->create();
         $body = Label::factory()->make()->toArray();
-        $response = $this->put(route('labels.update', $model), ['label' => $body]);
+        $response = $this->put(route('labels.update', $model), $body);
 
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('labels', [
-            ...$model->toArray(),
+            'id' => $model->id,
             ...$body,
         ]);
     }
@@ -81,6 +81,6 @@ class LabelControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
 
-        $this->assertDatabaseMissing('labels', $model->toArray());
+        $this->assertDatabaseMissing('labels', ['id' => $model->id]);
     }
 }

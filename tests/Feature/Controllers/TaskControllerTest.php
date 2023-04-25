@@ -66,7 +66,7 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('tasks', [
-            ...$model->toArray(),
+            'id' => $model->id,
             ...$body,
         ]);
     }
@@ -82,6 +82,6 @@ class TaskControllerTest extends TestCase
         $response->assertRedirect();
         $response->assertSessionHasNoErrors();
 
-        $this->assertDatabaseMissing('tasks', $model->toArray());
+        $this->assertDatabaseMissing('tasks', ['id' => $model->id]);
     }
 }

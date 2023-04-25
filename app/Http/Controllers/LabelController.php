@@ -22,11 +22,11 @@ class LabelController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'label.name' => 'required|string|unique:labels,name',
-            'label.description' => 'nullable|string',
+            'name' => 'required|string|unique:labels,name',
+            'description' => 'nullable|string',
         ]);
 
-        Label::create($validated['label']);
+        Label::create($validated);
 
         flash()->success(__('label.stored'));
 
@@ -46,11 +46,11 @@ class LabelController extends Controller
     public function update(Request $request, Label $label): RedirectResponse
     {
         $validated = $request->validate([
-            'label.name' => 'string|unique:labels,name',
-            'label.description' => 'nullable|string',
+            'name' => 'string|unique:labels,name',
+            'description' => 'nullable|string',
         ]);
 
-        $label->update($validated['label']);
+        $label->update($validated);
 
         flash()->success(__('label.updated'));
 
