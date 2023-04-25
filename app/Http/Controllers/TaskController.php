@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
@@ -27,7 +28,7 @@ class TaskController extends Controller
     public function show(int $id): View
     {
         return view('task.show', [
-            'model' => Task::with('status')->findOrFail($id),
+            'model' => Task::with('status', 'labels')->findOrFail($id),
         ]);
     }
 
@@ -38,8 +39,8 @@ class TaskController extends Controller
             'description' => 'nullable|string',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'array',
-            'labels.*' => 'array|exists:labels,id',
+            'labels' => 'nullable|array',
+            'labels.*' => 'exists:labels,id',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -61,6 +62,8 @@ class TaskController extends Controller
         return view('task.create', [
             'statuses' => TaskStatus::all(),
             'assignees' => User::all(),
+            'labels' => Label::all(),
+            'taskLabelsIds' => collect(),
         ]);
     }
 
@@ -70,6 +73,8 @@ class TaskController extends Controller
             'statuses' => TaskStatus::all(),
             'assignees' => User::all(),
             'model' => $task,
+            'labels' => Label::all(),
+            'taskLabelsIds' => $task->labels()->pluck('id'),
         ]);
     }
 
@@ -81,7 +86,7 @@ class TaskController extends Controller
             'status_id' => 'exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
             'labels' => 'array',
-            'labels.*' => 'array|exists:labels,id',
+            'labels.*' => 'exists:labels,id',
         ]);
 
 

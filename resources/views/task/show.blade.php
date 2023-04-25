@@ -13,6 +13,12 @@
                         <p><span class="font-black">Описание:</span>{{ $model->description }}</p>
                     </div>
 
+                    @foreach($model->labels as $label)
+                        <span class="badge text-bg-primary">
+                            {{ $label->name }}
+                        </span>
+                    @endforeach
+
                 </div>
             </div>
         </div>
