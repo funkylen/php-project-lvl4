@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskController extends Controller
 {
@@ -20,8 +22,19 @@ class TaskController extends Controller
 
     public function index(): View
     {
+        $models = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->with('status', 'assignedTo', 'createdBy')
+            ->get();
+
         return view('task.index', [
-            'models' => Task::with('status', 'assignedTo', 'createdBy')->get(),
+            'models' => $models,
+            'users' => User::all(),
+            'statuses' => TaskStatus::all(),
         ]);
     }
 
