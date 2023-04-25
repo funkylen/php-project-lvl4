@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use database\Label;
+use App\Models\Label;
 use Illuminate\Database\Seeder;
 
 class LabelSeeder extends Seeder
