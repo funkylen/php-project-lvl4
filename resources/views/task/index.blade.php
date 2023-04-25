@@ -34,16 +34,18 @@
                                 @auth
 
                                     <td>
-                                        {{ Form::model($model,
-                                            ['route' => ['tasks.destroy', $model],
-                                            'method' => 'delete',
-                                            'class' => 'btn btn-sm btn-danger',
-                                            'onsubmit'=> 'return confirm("' . __('Are you sure?') .'")'])
-                                        }}
-                                        {{ Form::submit(__('task.destroy')) }}
-                                        {{ Form::close() }}
-
                                         {{ Html::linkRoute('tasks.edit', __('task.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
+
+                                        @if(auth()->id() === $model->created_by_id)
+                                            {{ Form::model($model,
+                                                ['route' => ['tasks.destroy', $model],
+                                                'method' => 'delete',
+                                                'class' => 'btn btn-sm btn-danger',
+                                                'onsubmit'=> 'return confirm("' . __('Are you sure?') .'")'])
+                                            }}
+                                            {{ Form::submit(__('task.destroy')) }}
+                                            {{ Form::close() }}
+                                        @endif
                                     </td>
 
                                 @endauth
