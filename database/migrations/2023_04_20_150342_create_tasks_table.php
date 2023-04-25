@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignIdFor(\App\Models\TaskStatus::class, 'status_id')->index();
-            $table->foreignIdFor(\App\Models\User::class, 'created_by_id')->index();
-            $table->foreignIdFor(\App\Models\User::class, 'assigned_to_id')->index()->nullable();
+            $table->foreignId('status_id')->references('id')->on('task_statuses');
+            $table->foreignId('created_by_id')->references('id')->on('users');
+            $table->foreignId('assigned_to_id')
+                ->nullable()
+                ->references('id')
+                ->on('users');
             $table->timestamps();
         });
     }

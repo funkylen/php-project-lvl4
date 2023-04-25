@@ -73,9 +73,10 @@ class TaskControllerTest extends TestCase
 
     public function testDestroy(): void
     {
-        $this->actingAs(User::factory()->create());
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
-        $model = Task::factory()->create();
+        $model = Task::factory()->create(['created_by_id' => $user->id]);
         $response = $this->delete(route('tasks.destroy', $model));
 
         $response->assertRedirect();

@@ -26,7 +26,7 @@ class TaskStatusController extends Controller
     {
         TaskStatus::create($request->validated('task_status'));
 
-        flash()->success(__('task_statuses.stored'));
+        flash()->success(__('task_status.stored'));
 
         return redirect(route('task_statuses.index'));
     }
@@ -47,16 +47,23 @@ class TaskStatusController extends Controller
     {
         $taskStatus->update($request->validated('task_status'));
 
-        flash()->success(__('task_statuses.updated'));
+        flash()->success(__('task_status.updated'));
 
         return redirect(route('task_statuses.index'));
     }
 
     public function destroy(TaskStatus $taskStatus): RedirectResponse
     {
+        if ($taskStatus->tasks()->exists()) {
+            flash()->error(__('task_status.has_tasks'));
+            return back()->withErrors([
+                'message' => __('task_status.has_tasks'),
+            ]);
+        }
+
         $taskStatus->delete();
 
-        flash()->success(__('task_statuses.deleted'));
+        flash()->success(__('task_status.deleted'));
 
         return redirect(route('task_statuses.index'));
     }

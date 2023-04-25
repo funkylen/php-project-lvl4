@@ -84,7 +84,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task): RedirectResponse
     {
-        if (auth()->id() !== $task->id) {
+        if (auth()->id() !== $task->created_by_id) {
             flash()->error(__('Forbidden'));
             return back();
         }
