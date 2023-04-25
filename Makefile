@@ -11,7 +11,7 @@ setup:
 	npm ci
 	npm run build
 
-setup:
+test-setup:
 	composer install
 	cp -n .env.testing .env
 	php artisan key:gen --ansi
