@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -32,17 +33,23 @@ class TaskController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'task.name' => 'required|string',
-            'task.description' => 'nullable|string',
-            'task.status_id' => 'required|exists:task_statuses,id',
-            'task.assigned_to_id' => 'nullable|exists:users,id',
+        $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'status_id' => 'required|exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id',
+            'labels' => 'array',
+            'labels.*' => 'array|exists:labels,id',
         ]);
 
-        Task::create([
-            ...$validated['task'],
-            'created_by_id' => auth()->id(),
-        ]);
+        DB::transaction(function () use ($request) {
+            $task = Task::create([
+                ...$request->except('labels'),
+                'created_by_id' => auth()->id(),
+            ]);
+
+            $task->labels()->sync($request->get('labels'));
+        });
 
         flash()->success(__('task.stored'));
 
@@ -68,14 +75,21 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task): RedirectResponse
     {
-        $validated = $request->validate([
-            'task.name' => 'string',
-            'task.description' => 'nullable|string',
-            'task.status_id' => 'exists:task_statuses,id',
-            'task.assigned_to_id' => 'nullable|exists:users,id',
+        $request->validate([
+            'name' => 'string',
+            'description' => 'nullable|string',
+            'status_id' => 'exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id',
+            'labels' => 'array',
+            'labels.*' => 'array|exists:labels,id',
         ]);
 
-        $task->update($validated['task']);
+
+        DB::transaction(function () use ($request, $task) {
+            $task->update($request->except('labels'));
+
+            $task->labels()->sync($request->get('labels'));
+        });
 
         flash()->success(__('task.updated'));
 
