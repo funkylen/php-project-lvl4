@@ -32,16 +32,14 @@
                                     <td>
                                         {{ Html::linkRoute('labels.edit', __('task.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
 
-                                        @if(auth()->id() === $model->created_by_id)
-                                            {{ Form::model($model,
-                                                ['route' => ['labels.destroy', $model],
-                                                'method' => 'delete',
-                                                'class' => 'btn btn-sm btn-danger',
-                                                'onsubmit'=> 'return confirm("' . __('Are you sure?') .'")'])
-                                            }}
-                                            {{ Form::submit(__('labels.destroy')) }}
-                                            {{ Form::close() }}
-                                        @endif
+                                        {{ Form::model($model,
+                                            ['route' => ['labels.destroy', $model],
+                                            'method' => 'delete',
+                                            'class' => 'btn btn-sm btn-danger',
+                                            'onsubmit'=> 'return confirm("' . __('Are you sure?') .'")'])
+                                        }}
+                                        {{ Form::submit(__('label.destroy')) }}
+                                        {{ Form::close() }}
                                     </td>
 
                                 @endauth
