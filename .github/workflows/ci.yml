@@ -16,15 +16,15 @@ jobs:
       matrix:
         php-versions: ['8.2']
 
-      services:
-        postgres:
-          image: postgres:latest
-          env:
-            POSTGRES_USER: hexlet_test
-            POSTGRES_PASSWORD: hexlet_test
-            POSTGRES_DB: hexlet_test
-          ports:
-            - 5432/tcp
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: hexlet_test
+          POSTGRES_PASSWORD: hexlet_test
+          POSTGRES_DB: hexlet_test
+        ports:
+          - 5432/tcp
 
     steps:
       - uses: actions/checkout@v3
