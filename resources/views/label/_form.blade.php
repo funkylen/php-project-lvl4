@@ -9,13 +9,13 @@
 
                     <div class="mb-3">
                         <x-input-label for="name" :value="__('label.name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="label[name]" :value="$name" required />
-                        <x-input-error :messages="$errors->get('label.name')" class="mt-2" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$name" required />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <x-input-label for="description" :value="__('label.description')" />
-                        <x-text-input id="description" class="block mt-1 w-full" type="text" name="label[description]" :value="$description" />
-                        <x-input-error :messages="$errors->get('label.description')" class="mt-2" />
+                        <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="$description" />
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
                     </div>
 
                     <x-primary-button>

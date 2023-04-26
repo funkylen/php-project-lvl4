@@ -2,6 +2,6 @@
     'route' => 'labels.store',
     'buttonText' => __('label.store'),
 
-    'name' => old('label.name'),
-    'description' => old('label.description'),
+    'name' => old('name'),
+    'description' => old('description'),
 ])

@@ -5,8 +5,8 @@
     'statuses' => $statuses,
     'assignees' => $assignees,
 
-    'name' => old('task.name'),
-    'description' => old('task.description'),
-    'statusId' => old('task.status_id'),
-    'assignedToId' => old('task.assigned_to_id'),
+    'name' => old('name'),
+    'description' => old('description'),
+    'statusId' => old('status_id'),
+    'assignedToId' => old('assigned_to_id'),
 ])
