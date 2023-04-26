@@ -18,8 +18,8 @@ return new class extends Migration {
         });
 
         Schema::create('label_task', function (Blueprint $table) {
-            $table->foreignId('task_id')->constrained('tasks');
-            $table->foreignId('label_id')->constrained('labels');
+            $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
+            $table->foreignId('label_id')->constrained('labels')->cascadeOnDelete();
         });
     }
 

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignId('status_id')->references('id')->on('task_statuses');
-            $table->foreignId('created_by_id')->references('id')->on('users');
+            $table->foreignId('status_id')->constrained('task_statuses')->cascadeOnDelete();
+            $table->foreignId('created_by_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('assigned_to_id')
                 ->nullable()
-                ->references('id')
-                ->on('users');
+                ->constrained('users')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }
