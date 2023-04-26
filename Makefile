@@ -3,8 +3,6 @@ install:
 
 test-setup:
 	composer install
-	php artisan key:gen --ansi
-	php artisan migrate --seed
 	npm ci
 	npm run build
 
