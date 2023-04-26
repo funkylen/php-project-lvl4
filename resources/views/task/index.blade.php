@@ -5,7 +5,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <div class="row mb-3">
-                        <div class="col-9">
+                        <div class="col">
                             {{ Form::open(['route' => 'tasks.index', 'method' => 'GET']) }}
                             <div class="flex gap-2">
                                 <select id="status_id" name="filter[status_id]" class="form-select">
@@ -33,9 +33,12 @@
                             {{ Form::close() }}
                         </div>
 
-                        <div class="col-3">
-                            {{ Html::linkRoute('tasks.create', __('task.create'), null, ['class' => 'btn btn-primary w-full']) }}
-                        </div>
+                        @auth
+                            <div class="col-3">
+                                {{ Html::linkRoute('tasks.create', __('task.create'), null, ['class' => 'btn btn-primary w-full']) }}
+                            </div>
+                        @endauth
+
                     </div>
 
 
