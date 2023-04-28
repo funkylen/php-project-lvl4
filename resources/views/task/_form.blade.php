@@ -38,7 +38,6 @@
                         <x-input-error :messages="$errors->get('assigned_to_id')" class="mt-2" />
                     </div>
                     <div class="mb-3">
-                        {{ json_encode($errors->get('labels')) }}
                         <x-input-label for="labels" :value="__('task.labels')" />
                         <select multiple id="labels" name="labels[]" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             @foreach($labels as $label)

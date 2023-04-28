@@ -73,14 +73,7 @@
                                         {{ Html::linkRoute('tasks.edit', __('task.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
 
                                         @if(auth()->id() === $model->created_by_id)
-                                            {{ Form::model($model,
-                                                ['route' => ['tasks.destroy', $model],
-                                                'method' => 'delete',
-                                                'class' => 'btn btn-sm btn-danger',
-                                                'onsubmit'=> 'return confirm("' . __('Are you sure?') .'")'])
-                                            }}
-                                            {{ Form::submit(__('task.destroy')) }}
-                                            {{ Form::close() }}
+                                            {{ Html::linkRoute('tasks.destroy', __('task.destroy'), $model, ['class' => 'btn btn-sm btn-danger', 'data-method' => 'delete', 'data-confirm' => __('Are you sure?'), 'rel' => 'nofollow']) }}
                                         @endif
                                     </td>
 
