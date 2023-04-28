@@ -30,8 +30,8 @@
                                 @auth
 
                                     <td>
-                                        {{ Html::linkRoute('task_statuses.edit', __('task_status.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
                                         {{ Html::linkRoute('task_statuses.destroy', __('task_status.destroy'), $model, ['class' => 'btn btn-sm btn-danger', 'data-method' => 'delete', 'data-confirm' => __('Are you sure?'), 'rel' => 'nofollow']) }}
+                                        {{ Html::linkRoute('task_statuses.edit', __('task_status.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
                                     </td>
 
                                 @endauth

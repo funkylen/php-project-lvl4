@@ -32,8 +32,8 @@
                                 @auth
 
                                     <td>
-                                        {{ Html::linkRoute('labels.edit', __('label.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
                                         {{ Html::linkRoute('labels.destroy', __('label.destroy'), $model, ['class' => 'btn btn-sm btn-danger', 'data-method' => 'delete', 'data-confirm' => __('Are you sure?'), 'rel' => 'nofollow']) }}
+                                        {{ Html::linkRoute('labels.edit', __('label.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
                                     </td>
 
                                 @endauth

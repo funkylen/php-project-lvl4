@@ -70,11 +70,10 @@
                                 @auth
 
                                     <td>
-                                        {{ Html::linkRoute('tasks.edit', __('task.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
-
                                         @if(auth()->id() === $model->created_by_id)
                                             {{ Html::linkRoute('tasks.destroy', __('task.destroy'), $model, ['class' => 'btn btn-sm btn-danger', 'data-method' => 'delete', 'data-confirm' => __('Are you sure?'), 'rel' => 'nofollow']) }}
                                         @endif
+                                        {{ Html::linkRoute('tasks.edit', __('task.edit'), $model, ['class' => 'btn btn-sm btn-outline-primary']) }}
                                     </td>
 
                                 @endauth
