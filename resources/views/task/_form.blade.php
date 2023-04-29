@@ -9,7 +9,7 @@
 
                     <div class="mb-3">
                         <x-input-label for="name" :value="__('task.name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$name" required />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="mb-3">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="mb-3">
                         <x-input-label for="status" :value="__('task.status')" />
-                        <select id="status" name="status_id" required class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                        <select id="status" name="status_id" class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             <option value>------</option>
                             @foreach($statuses as $status)
                                 <option value="{{ $status->id }}" @selected($statusId == $status->id)>{{ $status->name }}</option>

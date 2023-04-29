@@ -9,7 +9,7 @@
 
                     <div class="mb-3">
                         <x-input-label for="name" :value="__('label.name')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$name" required />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="$name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
                     <div class="mb-3">
