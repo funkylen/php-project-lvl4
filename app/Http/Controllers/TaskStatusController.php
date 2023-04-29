@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TaskStatus\StoreRequest;
+use App\Http\Requests\TaskStatus\UpdateRequest;
 use App\Models\TaskStatus;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
@@ -21,13 +22,9 @@ class TaskStatusController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:task_statuses,name',
-        ]);
-
-        TaskStatus::create($validated);
+        TaskStatus::create($request->validated());
 
         flash()->success(__('task_status.stored'));
 
@@ -46,13 +43,9 @@ class TaskStatusController extends Controller
         ]);
     }
 
-    public function update(Request $request, TaskStatus $taskStatus): RedirectResponse
+    public function update(UpdateRequest $request, TaskStatus $taskStatus): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|unique:task_statuses,name',
-        ]);
-
-        $taskStatus->update($validated);
+        $taskStatus->update($request->validated());
 
         flash()->success(__('task_status.updated'));
 
