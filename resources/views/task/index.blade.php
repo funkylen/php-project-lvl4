@@ -61,7 +61,7 @@
                         @foreach($models as $model)
 
                             <tr>
-                                <th scope="row">{{ $model->id }}</th>
+                                <td>{{ $model->id }}</td>
                                 <td>{{ $model->status->name }}</td>
                                 <td><a href="{{ route('tasks.show', $model) }}">{{ $model->name }}</a></td>
                                 <td>{{ $model->createdBy->name }}</td>

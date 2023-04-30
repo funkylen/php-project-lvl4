@@ -25,7 +25,7 @@
                         @foreach($models as $model)
 
                             <tr>
-                                <th scope="row">{{ $model->id }}</th>
+                                <td>{{ $model->id }}</td>
                                 <td>{{ $model->name }}</td>
                                 <td>{{ $model->description }}</td>
                                 <td>{{ $model->created_at }}</td>

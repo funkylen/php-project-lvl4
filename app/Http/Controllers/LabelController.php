@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Label\StoreRequest;
+use App\Http\Requests\Label\UpdateRequest;
 use App\Models\Label;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,14 +21,9 @@ class LabelController extends Controller
         return view('label.index', ['models' => Label::all()]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|unique:labels,name',
-            'description' => 'nullable|string',
-        ]);
-
-        Label::create($validated);
+        Label::create($request->validated());
 
         flash()->success(__('label.stored'));
 
@@ -43,14 +40,9 @@ class LabelController extends Controller
         return view('label.edit', ['model' => $label]);
     }
 
-    public function update(Request $request, Label $label): RedirectResponse
+    public function update(UpdateRequest $request, Label $label): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'string|unique:labels,name',
-            'description' => 'nullable|string',
-        ]);
-
-        $label->update($validated);
+        $label->update($request->validated());
 
         flash()->success(__('label.updated'));
 
