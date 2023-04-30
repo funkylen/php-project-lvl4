@@ -7,7 +7,7 @@ class UpdateRequest extends BaseRequest
     public function rules(): array
     {
         return [
-            'name' => 'unique:labels,name',
+            'name' => 'unique:labels,name,' . $this->label->id,
             'description' => 'nullable|string',
         ];
     }
