@@ -18,7 +18,7 @@ class LabelController extends Controller
 
     public function index(): View
     {
-        return view('label.index', ['models' => Label::all()]);
+        return view('label.index', ['models' => Label::paginate()]);
     }
 
     public function store(StoreRequest $request): RedirectResponse

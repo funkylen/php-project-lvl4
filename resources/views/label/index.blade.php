@@ -44,7 +44,7 @@
                         </tbody>
                     </table>
 
-
+                    {{ $models->links() }}
                 </div>
             </div>
         </div>

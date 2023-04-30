@@ -18,7 +18,7 @@ class TaskStatusController extends Controller
     public function index(): View
     {
         return view('task_status.index', [
-            'models' => TaskStatus::all(),
+            'models' => TaskStatus::paginate(),
         ]);
     }
 

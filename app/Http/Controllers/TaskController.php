@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Label;
 use App\Models\Task;
 use App\Models\TaskStatus;
@@ -29,7 +31,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->with('status', 'assignedTo', 'createdBy')
-            ->get();
+            ->paginate();
 
         return view('task.index', [
             'models' => $models,
@@ -45,17 +47,8 @@ class TaskController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string',
-            'description' => 'nullable|string',
-            'status_id' => 'required|exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'nullable|array',
-            'labels.*' => 'exists:labels,id',
-        ]);
-
         DB::transaction(function () use ($request) {
             $task = Task::create([
                 ...$request->except('labels'),
@@ -91,18 +84,8 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update(Request $request, Task $task): RedirectResponse
+    public function update(UpdateRequest $request, Task $task): RedirectResponse
     {
-        $request->validate([
-            'name' => 'string',
-            'description' => 'nullable|string',
-            'status_id' => 'exists:task_statuses,id',
-            'assigned_to_id' => 'nullable|exists:users,id',
-            'labels' => 'array',
-            'labels.*' => 'exists:labels,id',
-        ]);
-
-
         DB::transaction(function () use ($request, $task) {
             $task->update($request->except('labels'));
 
