@@ -4,9 +4,17 @@ includes:
 parameters:
 
     paths:
-        - app/
-        - tests/
+        - app
+        - routes
+        - tests
 
-    level: 5
+    level: 8
 
+    excludePaths:
+        - app/Http/Controllers/Auth/*
+        - routes/console.php
+        - routes/auth.php
+        - routes/channels.php
+
+    checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
