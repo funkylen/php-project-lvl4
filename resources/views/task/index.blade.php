@@ -66,7 +66,7 @@
                                 <td><a href="{{ route('tasks.show', $model) }}">{{ $model->name }}</a></td>
                                 <td>{{ $model->createdBy->name }}</td>
                                 <td>{{ $model->assignedTo?->name }}</td>
-                                <td>{{ $model->created_at }}</td>
+                                <td>{{ $model->created_at->format('d.m.Y') }}</td>
                                 @auth
 
                                     <td>

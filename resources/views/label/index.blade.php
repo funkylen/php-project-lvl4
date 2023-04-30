@@ -28,7 +28,7 @@
                                 <td>{{ $model->id }}</td>
                                 <td>{{ $model->name }}</td>
                                 <td>{{ $model->description }}</td>
-                                <td>{{ $model->created_at }}</td>
+                                <td>{{ $model->created_at->format('d.m.Y') }}</td>
                                 @auth
 
                                     <td>
